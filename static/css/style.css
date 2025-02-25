@@ -90,7 +90,7 @@ p {
 
 /* Table Container with Scrollbar */
 .table-container {
-    max-height: 600px; /* Adjust this value as needed */
+    max-height: 650px; /* Adjust this value as needed */
     overflow-y: auto; /* Enables vertical scrolling */
     border: 1px solid #ddd; /* Matches table border */
     border-radius: 8px; /* Consistent with table styling */

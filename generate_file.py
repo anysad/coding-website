@@ -33,7 +33,7 @@ def generate_movies():
     for i in range(50):
         title = generate_title(i)
         genre = random.choice(genres)
-        release_year = random.randint(1980, 2023)
+        release_year = random.randint(1980, 2025)
         rating = round(random.uniform(0.0, 10.0), 1)
         votes = random.randint(100, 10000)
         movies.append([title, genre, release_year, rating, votes])
