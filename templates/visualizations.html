@@ -9,7 +9,7 @@
         <h1>Datu vizualizācijas</h1>
         <form method="post">
             <div class="form-group">
-                <label for="plot_type">Izvēlieties Plot Type:</label>
+                <label for="plot_type">Izvēlieties visualizācijas metodi:</label>
                 <select name="plot_type" id="plot_type" class="form-control" onchange="this.form.submit()">
                     {% for option in plot_options %}
                         <option value="{{ option.id }}" {% if selected_plot and selected_plot[0] == option.title %}selected{% endif %}>{{ option.title }}</option>

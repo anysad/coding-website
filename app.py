@@ -1,12 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 import matplotlib
-import matplotlib.pyplot as plt
-import seaborn as sns
 from peewee import *
 from sklearn.linear_model import LinearRegression
-from io import BytesIO
-import base64
+from plots import plot_avg_rating_per_year, plot_movies_per_genre, plot_rating_by_genre_box, plot_rating_distribution, plot_rating_vs_votes
 
 app = Flask(__name__)
 matplotlib.use('Agg')
@@ -42,85 +39,6 @@ def load_csv_to_db(csv_file):
             votes=row['votes']
         )
 
-# Plot functions returning base64-encoded images
-def plot_movies_per_genre(df):
-    plt.figure(figsize=(10, 6))
-    genre_count = df['genre'].value_counts()
-    sns.barplot(x=genre_count.index, y=genre_count.values)
-    plt.xlabel('Genre')
-    plt.ylabel('Count')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-    plt.clf()
-    plt.close('all')
-    return plot_data
-
-def plot_avg_rating_per_year(df):
-    plt.figure(figsize=(10, 6))
-    yearly_rating = df.groupby('release_year')['rating'].mean()
-    yearly_rating.plot(kind='line')
-    plt.xlabel('Release Year')
-    plt.ylabel('Average Rating')
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-    plt.clf()
-    plt.close('all')
-    return plot_data
-
-def plot_rating_vs_votes(df):
-    plt.figure(figsize=(10, 6))
-    sns.scatterplot(x='votes', y='rating', data=df)
-    plt.xlabel('Votes')
-    plt.ylabel('Rating')
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-    plt.clf()
-    plt.close('all')
-    return plot_data
-
-def plot_rating_distribution(df):
-    plt.figure(figsize=(10, 6))
-    sns.histplot(df['rating'], bins=20, kde=True)
-    plt.xlabel('Rating')
-    plt.ylabel('Frequency')
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-    plt.clf()
-    plt.close('all')
-    return plot_data
-
-def plot_rating_by_genre_box(df):
-    plt.figure(figsize=(12, 6))
-    sns.boxplot(x='genre', y='rating', data=df)
-    plt.xlabel('Genre')
-    plt.ylabel('Rating')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    buf = BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plot_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-    plt.close()
-    return plot_data
-
 # Routes
 @app.route('/')
 def home():
@@ -144,11 +62,11 @@ def visualizations():
 
     # Define available plot options
     plot_options = [
-        {"id": "genre", "title": "Movies per Genre", "func": plot_movies_per_genre},
-        {"id": "year", "title": "Average Rating per Year", "func": plot_avg_rating_per_year},
-        {"id": "votes", "title": "Rating vs. Votes", "func": plot_rating_vs_votes},
-        {"id": "distribution", "title": "Distribution of Ratings", "func": plot_rating_distribution},
-        {"id": "box", "title": "Rating Distribution by Genre", "func": plot_rating_by_genre_box}
+        {"id": "genre", "title": "Filmas pēc žanra", "func": plot_movies_per_genre},
+        {"id": "year", "title": "Vidējais vērtējums gadā", "func": plot_avg_rating_per_year},
+        {"id": "votes", "title": "Vērtējums vs. Balss", "func": plot_rating_vs_votes},
+        {"id": "distribution", "title": "Vērtējumu izplatīšana", "func": plot_rating_distribution},
+        {"id": "box", "title": "Vērtējumu izplatīšana pēc žanra", "func": plot_rating_by_genre_box}
     ]
 
     df = pd.DataFrame(list(movies.dicts()))
