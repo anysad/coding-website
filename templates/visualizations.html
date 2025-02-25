@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Visualizations{% endblock %}
+
+{% block content %}
+    {% if no_data %}
+        <p>Vizualizācijai vēl nav augšupielādēti dati. Lūdzu, <a href="{{ url_for('upload') }}">augšupielādējiet failu</a>.</p>
+    {% else %}
+        <h1>Datu vizualizācijas</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="plot_type">Izvēlieties Plot Type:</label>
+                <select name="plot_type" id="plot_type" class="form-control" onchange="this.form.submit()">
+                    {% for option in plot_options %}
+                        <option value="{{ option.id }}" {% if selected_plot and selected_plot[0] == option.title %}selected{% endif %}>{{ option.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        {% if selected_plot %}
+            <div class="mb-4">
+                <h3>{{ selected_plot[0] }}</h3>
+                <img src="data:image/png;base64,{{ selected_plot[1] }}" alt="{{ selected_plot[0] }}">
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

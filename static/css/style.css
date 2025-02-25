@@ -1,0 +1,161 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #007BFF;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1, h3 {
+    color: #007BFF;
+}
+
+p {
+    font-size: 18px;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* Table Container with Scrollbar */
+.table-container {
+    max-height: 600px; /* Adjust this value as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    border: 1px solid #ddd; /* Matches table border */
+    border-radius: 8px; /* Consistent with table styling */
+    background: #ffffff; /* Matches table background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent with other elements */
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+input[type="number"], input[type="file"], select.form-control {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #333;
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 13px 23px;
+    background: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.alert {
+    font-style: italic;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 20px auto;
+}
+
+/* Visualization Section */
+.mb-4 {
+    margin-bottom: 20px;
+}

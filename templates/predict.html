@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Rating{% endblock %}
+
+{% block content %}
+    {% if no_data %}
+        <p>Pagaidām nav augšupielādēti dati, lai prognozētu kaut ko. Lūdzu, <a href="{{ url_for('upload') }}">augšupielādējiet failu</a>.</p>
+    {% else %}
+        <h1>Paredzēt filmas vērtējumu</h1>
+        <p class="alert">Šī prognoze ir balstīta uz pieejamajiem datiem un var nebūt 100% precīza. Lūdzu, interpretējiet sniegto informāciju piesardzīgi.</p>
+        
+        <form method="post">
+            <div class="form-group">
+                <label for="votes">Balsu skaits:</label>
+                <input type="number" class="form-control" id="votes" name="votes" required>
+            </div>
+            {% if prediction %}
+                <div class="alert alert-success mt-3">Paredzamais vērtējums: <strong>{{ prediction }}</strong></div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary mt-2">Prognozēt</button>
+        </form>
+
+        {% if error %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

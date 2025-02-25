@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Upload CSV{% endblock %}
+
+{% block content %}
+    <h1>Augšupielādējiet filmas datus</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Atlasiet augšupielādējamo CSV failu, lai to vizualizētu.</label>
+            <input type="file" class="form-control-file" id="file" name="file" accept=".csv">
+        </div>
+        <button type="submit" class="btn">Augšupielādēt</button>
+    </form>
+{% endblock %}

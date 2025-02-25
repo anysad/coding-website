@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Database{% endblock %}
+
+{% block content %}
+    {% if no_data %}
+        <p>Pagaidām nav augšupielādēti dati, lai parādītu informāciju. Lūdzu, <a href="{{ url_for('upload') }}">augšupielādējiet failu</a>.</p>
+    {% else %}
+        <h1>Filmu datubāze</h1>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nosaukums</th>
+                        <th>Žanrs</th>
+                        <th>Izdošanas gads</th>
+                        <th>Vērtējums</th>
+                        <th>Balsis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies %}
+                    <tr>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.genre }}</td>
+                        <td>{{ movie.release_year }}</td>
+                        <td>{{ movie.rating }}</td>
+                        <td>{{ movie.votes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
