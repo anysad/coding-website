@@ -23,7 +23,8 @@ class Movie(Model):
 
 # Initialize database
 db.connect()
-Movie.delete().execute()  # Clear existing data for simplicity
+if bool(Movie.select()):
+    Movie.delete().execute()  # Clear existing data for simplicity
 db.create_tables([Movie], safe=True)
 
 # Load CSV data into the database
@@ -98,12 +99,11 @@ def predict():
         return render_template('predict.html', no_data=no_data)
     if request.method == 'POST':
         df = pd.DataFrame(list(movies.dicts()))
-        X = df[['votes']]
+        x = df[['votes']]
         y = df['rating']
         model = LinearRegression()
-        model.fit(X, y)
+        model.fit(x, y)
         votes = int(request.form['votes'])
-        print(model.predict([[votes]]))
         predicted_rating = model.predict([[votes]])[0]
         return render_template('predict.html', no_data=no_data, prediction=f"{predicted_rating:.2f}")
     return render_template('predict.html', no_data=no_data)
