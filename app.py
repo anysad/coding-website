@@ -8,7 +8,7 @@ from plots import plot_avg_rating_per_year, plot_movies_per_genre, plot_rating_b
 app = Flask(__name__)
 matplotlib.use('Agg')
 
-# Database setup with SQLite and Peewee ORM
+# Database setup
 db = SqliteDatabase('movies.db')
 
 class Movie(Model):
@@ -24,13 +24,13 @@ class Movie(Model):
 # Initialize database
 db.connect()
 if bool(Movie.select()):
-    Movie.delete().execute()  # Clear existing data for simplicity
+    Movie.delete().execute()  # Clear existing data
 db.create_tables([Movie], safe=True)
 
 # Load CSV data into the database
 def load_csv_to_db(csv_file):
     df = pd.read_csv(csv_file)
-    Movie.delete().execute()  # Clear existing data for simplicity
+    Movie.delete().execute()  # Clear existing data
     for _, row in df.iterrows():
         Movie.create(
             title=row['title'],
@@ -80,7 +80,7 @@ def visualizations():
                 selected_plot = (plot["title"], plot["func"](df))
                 break
     else:
-        # Default to first plot on initial load if GET
+        # Default to first plot on initial load
         selected_plot = (plot_options[0]["title"], plot_options[0]["func"](df))
 
     return render_template('visualizations.html', no_data=no_data, plot_options=plot_options, selected_plot=selected_plot)

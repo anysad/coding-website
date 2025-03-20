@@ -7,7 +7,7 @@ import base64
 
 matplotlib.use('Agg')
 
-# Plot functions returning base64-encoded images
+# Plot functions
 def plot_movies_per_genre(df):
     plt.figure(figsize=(10, 6))
     genre_count = df['genre'].value_counts()
