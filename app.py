@@ -24,13 +24,13 @@ class Movie(Model):
 # Initialize database
 db.connect()
 if bool(Movie.select()):
-    Movie.delete().execute()  # Clear existing data
+    Movie.delete().execute()  # clear this mf data
 db.create_tables([Movie], safe=True)
 
-# Load CSV data into the database
+# load the data up!!!
 def load_csv_to_db(csv_file):
     df = pd.read_csv(csv_file)
-    Movie.delete().execute()  # Clear existing data
+    Movie.delete().execute()  # clear this mf data
     for _, row in df.iterrows():
         Movie.create(
             title=row['title'],
@@ -61,7 +61,7 @@ def visualizations():
     if no_data:
         return render_template('visualizations.html', no_data=no_data)
 
-    # Define available plot options
+    # define all of the plots
     plot_options = [
         {"id": "genre", "title": "Filmas pēc žanra", "func": plot_movies_per_genre},
         {"id": "year", "title": "Vidējais vērtējums gadā", "func": plot_avg_rating_per_year},
@@ -80,7 +80,7 @@ def visualizations():
                 selected_plot = (plot["title"], plot["func"](df))
                 break
     else:
-        # Default to first plot on initial load
+        # default to the first plot if the user FINALLY decided to check the visualizations tab
         selected_plot = (plot_options[0]["title"], plot_options[0]["func"](df))
 
     return render_template('visualizations.html', no_data=no_data, plot_options=plot_options, selected_plot=selected_plot)
